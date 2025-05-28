@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.UI;
 
 public class BoardCellInteraction : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class BoardCellInteraction : MonoBehaviour
 
     private Vector2Int coordinates;
 
+    private static bool isGameOver = false;
+
+    private static GameUIManager uiManager;
+
     private void Awake() {
         string rowName = transform.parent.name;
         string columnName = transform.name;
@@ -23,9 +28,15 @@ public class BoardCellInteraction : MonoBehaviour
         coordinates = new Vector2Int(x, y);
     }
 
+    private void Start() {
+        if (uiManager == null) {
+            uiManager = FindObjectOfType<GameUIManager>();
+        }
+    }
+
     public void OnSelectEntered(SelectEnterEventArgs args) {
-        if (placedStones.ContainsKey(coordinates)) {
-            Debug.Log($"Board Clicked : {coordinates}");
+        Debug.Log($"Board Clicked : {coordinates}");
+        if (isGameOver || placedStones.ContainsKey(coordinates)) {
             return;
         }
 
@@ -35,14 +46,18 @@ public class BoardCellInteraction : MonoBehaviour
         GameObject stone = Instantiate(prefab, spawnPos, Quaternion.identity);
         placedStones.Add(coordinates, stone);
 
-        if (CheckWin(coordiantes, isBlackTurn)) {
+        if (CheckWin(coordinates, isBlackTurn)) {
             Debug.Log(isBlackTurn ? "Black Win" : "White Win");
+            isGameOver = true;
+            uiManager?.ShowWinner(isBlackTurn);
+            FindObjectOfType<BoardResetManager>()?.CameraCanvas.SetActive(true);
         }
 
         isBlackTurn = !isBlackTurn;
+        uiManager?.UpdateTurnUI(isBlackTurn);
     }
 
-    private bool CheckWin(Vector2Int, current, bool black) {
+    private bool CheckWin(Vector2Int current, bool black) {
         Vector2Int[] directions = new Vector2Int[] {
             Vector2Int.right, Vector2Int.up, new Vector2Int(1, 1), new Vector2Int(1, -1)
         };
@@ -56,6 +71,7 @@ public class BoardCellInteraction : MonoBehaviour
                 return true;
         }
         return false;
+
     }
 
     private int CountInDirection(Vector2Int start, Vector2Int dir, bool black) {
@@ -66,7 +82,7 @@ public class BoardCellInteraction : MonoBehaviour
             bool isBlackStone = stone.CompareTag("BlackStone");
             bool isWhiteStone = stone.CompareTag("WhiteStone");
 
-            if ((black && isBlackstone) || (!black && isWhiteStone)) {
+            if ((black && isBlackStone) || (!black && isWhiteStone)) {
                 count++;
                 pos += dir;
             }
