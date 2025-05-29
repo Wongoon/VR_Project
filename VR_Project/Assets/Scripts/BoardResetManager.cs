@@ -23,6 +23,9 @@ public class BoardResetManager : MonoBehaviour
         var turnField = typeof(BoardCellInteraction).GetField("isBlackTurn", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
         turnField.SetValue(null, false);
 
+        var gameOver = typeof(BoardCellInteraction).GetField("isGameOver", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+        gameOver.SetValue(null, false);
+
         Debug.Log("Board has been reset.");
         FindObjectOfType<GameUIManager>()?.ClearMessage();
     }

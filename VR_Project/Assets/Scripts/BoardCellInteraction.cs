@@ -36,7 +36,9 @@ public class BoardCellInteraction : MonoBehaviour
 
     public void OnSelectEntered(SelectEnterEventArgs args) {
         Debug.Log($"Board Clicked : {coordinates}");
-        if (isGameOver || placedStones.ContainsKey(coordinates)) {
+        Debug.Log(args.interactorObject);
+        if (isGameOver || placedStones.ContainsKey(coordinates))
+        {
             return;
         }
 
@@ -46,11 +48,13 @@ public class BoardCellInteraction : MonoBehaviour
         GameObject stone = Instantiate(prefab, spawnPos, Quaternion.identity);
         placedStones.Add(coordinates, stone);
 
-        if (CheckWin(coordinates, isBlackTurn)) {
+        if (CheckWin(coordinates, isBlackTurn))
+        {
             Debug.Log(isBlackTurn ? "Black Win" : "White Win");
             isGameOver = true;
             uiManager?.ShowWinner(isBlackTurn);
             FindObjectOfType<BoardResetManager>()?.CameraCanvas.SetActive(true);
+            return;
         }
 
         isBlackTurn = !isBlackTurn;

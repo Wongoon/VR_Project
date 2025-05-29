@@ -7,11 +7,10 @@ using TMPro;
 public class GameUIManager : MonoBehaviour
 {
     public TMP_Text turnText;
-    public TMP_Text winText;
 
     private void Start() {
+        turnText.text = "";
         UpdateTurnUI(false);
-        winText.text = "";
     }
 
     public void UpdateTurnUI(bool isBlackTurn) {
@@ -19,10 +18,12 @@ public class GameUIManager : MonoBehaviour
     }
 
     public void ShowWinner(bool blackWon) {
-        winText.text = blackWon ? "Black Win" : "White Win";
+        turnText.text = blackWon ? "Black Win" : "White Win";
     }
 
-    public void ClearMessage() {
-        winText.text = "";
+    public void ClearMessage()
+    {
+        turnText.text = "";
+        UpdateTurnUI(false);
     }
 }
