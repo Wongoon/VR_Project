@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
+using System;
 
 public class BoardCellInteraction : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class BoardCellInteraction : MonoBehaviour
     private static bool isGameOver = false;
 
     private static GameUIManager uiManager;
+    public static bool IsGameOver => isGameOver;
 
     private void Awake() {
         string rowName = transform.parent.name;
@@ -35,18 +37,25 @@ public class BoardCellInteraction : MonoBehaviour
     }
 
     public void OnSelectEntered(SelectEnterEventArgs args) {
-        Debug.Log($"Board Clicked : {coordinates}");
-        Debug.Log(args.interactorObject);
         if (isGameOver || placedStones.ContainsKey(coordinates))
         {
             return;
         }
 
-        GameObject prefab = isBlackTurn ? blackStonePrefab : whiteStonePrefab;
+        if (StoneHolder.heldStone == null) {
+            Debug.Log("Not Held");
+            return;
+        }
+
+        GameObject held = StoneHolder.heldStone;
         Vector3 spawnPos = transform.position + Vector3.up * 1.5f;
 
-        GameObject stone = Instantiate(prefab, spawnPos, Quaternion.identity);
+        GameObject stone = Instantiate(held, spawnPos, Quaternion.identity);
+        stone.tag = held.tag;
         placedStones.Add(coordinates, stone);
+
+        Destroy(StoneHolder.heldStone);
+        StoneHolder.heldStone = null;
 
         if (CheckWin(coordinates, isBlackTurn))
         {
@@ -93,5 +102,22 @@ public class BoardCellInteraction : MonoBehaviour
             else break;
         }
         return count;
+    }
+
+    public static void ResetBoardState() {
+        foreach (var stone in placedStones.Values) {
+            if (stone != null) {
+                GameObject.Destroy(stone);
+            }
+        }
+
+        placedStones.Clear();
+        isBlackTurn = false;
+        isGameOver = false;
+    }
+
+    public static bool IsBlackTurn()
+    {
+        return isBlackTurn;
     }
 }
