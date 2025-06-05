@@ -14,11 +14,11 @@ public class GameUIManager : MonoBehaviour
     }
 
     public void UpdateTurnUI(bool isBlackTurn) {
-        turnText.text = isBlackTurn ? "Black's Turn" : "White's Turn";
+        turnText.text = isBlackTurn ? "Black\nTurn" : "White\nTurn";
     }
 
     public void ShowWinner(bool blackWon) {
-        turnText.text = blackWon ? "Black Win" : "White Win";
+        turnText.text = blackWon ? "Black\nWin" : "White\nWin";
     }
 
     public void ClearMessage()
