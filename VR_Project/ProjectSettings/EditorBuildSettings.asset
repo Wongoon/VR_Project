@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: 8349ff4a218bacc4b8911b2be8616a70
+  - enabled: 1
     path: Assets/Scenes/GomokuScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/AppleGameScene.unity
+    guid: 800fad31d1b392e41b96da89c9e1d8c7
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ca3328913cd91c240886e2064d76879c,
       type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4979fed514777264eb69e05384762ea4,
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 79bbb624218c1b64caa0de242457f18e,
       type: 2}
     xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 8f01c1fa9a2dac1449c9ffe9dec50b78,
       type: 2}
