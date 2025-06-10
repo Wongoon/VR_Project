@@ -98,19 +98,7 @@ public class AppleBlock : MonoBehaviour
                 string scoreText = isSpecial ? "+2" : "+1";
                 floating.SetText(scoreText);
             }
-            else
-            {
-                Debug.LogError("❌ FloatingScore 스크립트를 찾지 못했습니다!");
-            }
         }
-        else
-        {
-            Debug.LogError("❌ 프리팹 또는 Canvas가 비어 있음!");
-        }
-
-        // ✅ 디버깅 출력
-        Debug.Log($"[DEBUG] floatingScoreTextPrefab: {floatingScoreTextPrefab}");
-        Debug.Log($"[DEBUG] worldSpaceCanvas: {worldSpaceCanvas}");
 
         // ✅ 사과 제거
         Destroy(gameObject);

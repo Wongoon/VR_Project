@@ -23,23 +23,8 @@ public class AppleClickSelector : MonoBehaviour
 
     void Update()
     {
-        HandleMouseClick();
         HandleXRTrigger(leftInteractor, leftController);
         HandleXRTrigger(rightInteractor, rightController);
-    }
-
-    private void HandleMouseClick()
-    {
-        /*if (Input.GetMouseButtonDown(0)) 주석 지우고 마우스 클릭 켜기
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                AppleBlock apple = hit.collider.GetComponentInParent<AppleBlock>();
-                if (apple != null)
-                    selector?.TrySelect(apple);
-            }
-        }*/
     }
 
     private void HandleXRTrigger(XRRayInteractor interactor, XRBaseController controller)

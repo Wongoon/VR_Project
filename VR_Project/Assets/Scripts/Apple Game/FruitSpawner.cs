@@ -55,10 +55,6 @@ public class FruitSpawner : MonoBehaviour
                     block.floatingScoreTextPrefab = floatingScoreTextPrefab;
                     block.worldSpaceCanvas = worldSpaceCanvas;
                 }
-                else
-                {
-                    Debug.LogWarning("🍎 생성된 과일에 AppleBlock 컴포넌트가 없습니다!");
-                }
             }
         }
 
@@ -68,10 +64,6 @@ public class FruitSpawner : MonoBehaviour
             bgmSource.clip = bgmClip;
             bgmSource.loop = true;
             bgmSource.Play();
-        }
-        else
-        {
-            Debug.LogWarning("🎵 BGM 설정이 누락되었습니다!");
         }
 
         // 5. 타이머 초기화 및 시작
@@ -105,7 +97,6 @@ public class FruitSpawner : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("⏰ 게임 종료!");
 
         // 1. BGM 정지
         if (bgmSource != null)

@@ -20,7 +20,5 @@ public class StoneSpawner : MonoBehaviour
         newStone.transform.SetParent(interactorTransform);
 
         StoneHolder.heldStone = newStone;
-
-        Debug.Log($"{interactorTransform.name}");
     }
 }

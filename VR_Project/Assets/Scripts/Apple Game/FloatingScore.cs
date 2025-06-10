@@ -17,12 +17,10 @@ public class FloatingScore : MonoBehaviour
 
         if (tmp == null)
         {
-            Debug.LogError("❌ TextMeshProUGUI 컴포넌트를 찾지 못했습니다.");
             return;
         }
 
         originalColor = tmp.color;
-        Debug.Log("✅ FloatingScore 시작됨");
     }
 
     void Update()
@@ -54,11 +52,6 @@ public class FloatingScore : MonoBehaviour
         if (tmp != null)
         {
             tmp.text = text;
-            Debug.Log($"📢 텍스트 설정됨: {text}");
-        }
-        else
-        {
-            Debug.LogError("❌ SetText 실패 - TMP가 null입니다.");
         }
     }
 }

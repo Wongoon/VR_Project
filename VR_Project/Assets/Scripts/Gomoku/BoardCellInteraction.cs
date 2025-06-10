@@ -43,7 +43,6 @@ public class BoardCellInteraction : MonoBehaviour
         }
 
         if (StoneHolder.heldStone == null) {
-            Debug.Log("Not Held");
             return;
         }
 
@@ -59,7 +58,6 @@ public class BoardCellInteraction : MonoBehaviour
 
         if (CheckWin(coordinates, isBlackTurn))
         {
-            Debug.Log(isBlackTurn ? "Black Win" : "White Win");
             isGameOver = true;
             uiManager?.ShowWinner(isBlackTurn);
             FindObjectOfType<BoardResetManager>()?.CameraCanvas.SetActive(true);
