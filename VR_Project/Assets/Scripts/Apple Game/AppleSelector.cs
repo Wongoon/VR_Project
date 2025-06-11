@@ -65,7 +65,7 @@ public class AppleSelector : MonoBehaviour
             foreach (var apple in applesInRect)
                 totalScore += apple.isSpecial ? 2 : 1;
 
-            GameManager.Instance.AddScore(totalScore);
+            AppleGameManager.Instance.AddScore(totalScore);
 
             foreach (var apple in applesInRect)
                 apple.DelayedDestroy(selectionDelay);

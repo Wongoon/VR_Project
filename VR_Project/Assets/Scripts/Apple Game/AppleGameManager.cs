@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class AppleGameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static AppleGameManager Instance;
 
     [Header("UI")]
     public TMP_Text scoreText;  // ✅ TMP로 변경

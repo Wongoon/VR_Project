@@ -72,9 +72,9 @@ public class FruitSpawner : MonoBehaviour
 
         // ✅ 이전 상태에서 다시 시작 가능하게 하기 위해 제거
         // hasSpawned = true; // ❌ 필요 없음
-        if (GameManager.Instance != null)
+        if (AppleGameManager.Instance != null)
         {
-            GameManager.Instance.ResetScore();
+            AppleGameManager.Instance.ResetScore();
         }
     }
 
